@@ -3,7 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.API", "Tescaro.TarefasApp.API\Tescaro.TarefasApp.API.csproj", "{2B21C143-C9ED-485D-B328-ED9053436025}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.API", "Tescaro.TarefasApp.API\Tescaro.TarefasApp.API.csproj", "{2B21C143-C9ED-485D-B328-ED9053436025}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6062ABBD-1848-49F8-B12B-5A625916A67F} = {6062ABBD-1848-49F8-B12B-5A625916A67F}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{03588ED3-A75E-4561-B490-9F6B6C8C9C9F}"
 EndProject
@@ -17,13 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{6D62FB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Intrastructure", "Intrastructure", "{525BC92D-96DE-4603-B76B-2F06A48B8298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.Application", "Tescaro.TarefasApp.Application\Tescaro.TarefasApp.Application.csproj", "{6062ABBD-1848-49F8-B12B-5A625916A67F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.Application", "Tescaro.TarefasApp.Application\Tescaro.TarefasApp.Application.csproj", "{6062ABBD-1848-49F8-B12B-5A625916A67F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.Domain", "Tescaro.TarefasApp.Domain\Tescaro.TarefasApp.Domain.csproj", "{1FA0EB3B-A015-4C2F-B797-F65F04484A03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.Domain", "Tescaro.TarefasApp.Domain\Tescaro.TarefasApp.Domain.csproj", "{1FA0EB3B-A015-4C2F-B797-F65F04484A03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.Ingra.Data", "Tescaro.TarefasApp.Ingra.Data\Tescaro.TarefasApp.Ingra.Data.csproj", "{74344CC8-DE60-40C7-AE98-2C9429EF7D20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.Ingra.Data", "Tescaro.TarefasApp.Ingra.Data\Tescaro.TarefasApp.Ingra.Data.csproj", "{74344CC8-DE60-40C7-AE98-2C9429EF7D20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.IntegrationsTests", "Tescaro.TarefasApp.IntegrationsTests\Tescaro.TarefasApp.IntegrationsTests.csproj", "{B37C2D5C-80B2-4D68-A4C9-98F3C84BF462}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.IntegrationsTests", "Tescaro.TarefasApp.IntegrationsTests\Tescaro.TarefasApp.IntegrationsTests.csproj", "{B37C2D5C-80B2-4D68-A4C9-98F3C84BF462}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

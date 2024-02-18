@@ -1,20 +1,32 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Tescaro.TarefasApp.Application.Commands;
+using Tescaro.TarefasApp.Application.DTOs;
+using Tescaro.TarefasApp.Application.Interfaces;
 
 namespace Tescaro.TarefasApp.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class TarefasController : ControllerBase
+    public class TarefasController:ControllerBase
     {
+        private readonly ITarefaAppService? _tarefaAppService;
+
+        public TarefasController(ITarefaAppService? tarefaAppService)
+        {
+            _tarefaAppService = tarefaAppService;
+        }
+
         /// <summary>
         /// Serviço para cadastro de tarefas.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post()
+        [ProducesResponseType(typeof(TarefaDTO), 201)]
+        public async Task<IActionResult> Post(TarefaCreateCommand command)
         {
-            return Ok();
+var dto = await _tarefaAppService?.Create(command);
+            return StatusCode(201, dto);
         }
 
         /// <summary>
@@ -22,9 +34,11 @@ namespace Tescaro.TarefasApp.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> Put()
+        [ProducesResponseType(typeof(TarefaDTO), 200)]
+        public async Task<IActionResult> Put(TarefaUpdateCommand command)
         {
-            return Ok();
+            var dto = await _tarefaAppService?.Update(command);
+            return StatusCode(200, dto);
         }
 
         /// <summary>
@@ -32,21 +46,39 @@ namespace Tescaro.TarefasApp.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> Delete()
+        [ProducesResponseType(typeof(TarefaDTO), 200)]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            return Ok();
+            var command = new TarefaDeleteCommand { Id = id };
+            var dto = await _tarefaAppService?.Delete(command);
+            return StatusCode(200, dto);
         }
 
         /// <summary>
         /// Serviço para consulta de tarefas.
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        [ProducesResponseType(typeof(List<TarefaDTO>), 200)]
+        public IActionResult GetAll()
         {
-            return Ok();
+            var dtos = _tarefaAppService.GetAll();
+            return StatusCode(200, dtos);
         }
 
+        /// <summary>
+        /// Serviço para consulta de tarefa por id.
+        /// </summary>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(TarefaDTO), 200)]
+        public IActionResult GetById(Guid id)
+        {
+            var dto = _tarefaAppService.GetById(id);
+            return StatusCode(200, dto);
+        }
 
     }
+
+
+
 }
+

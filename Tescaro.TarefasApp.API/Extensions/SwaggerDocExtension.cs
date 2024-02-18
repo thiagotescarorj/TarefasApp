@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace Tescaro.TarefasApp.API.Extentions
+namespace Tescaro.TarefasApp.API.Extensions
 {
     /// <summary>
     /// Classe de extenção para configuração do Swagger (OPEN API)

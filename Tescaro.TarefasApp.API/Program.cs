@@ -1,4 +1,5 @@
-using Tescaro.TarefasApp.API.Extentions;
+using Tescaro.TarefasApp.API.Extensions;
+using Tescaro.TarefasApp.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddRouting( x => x.LowercaseUrls = true);// URLS em caixa baixa
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDoc();
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
