@@ -1,23 +1,27 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Tescaro.TarefasApp.Application.Commands;
-using Tescaro.TarefasApp.Application.Data;
 using Tescaro.TarefasApp.Application.DTOs;
 using Tescaro.TarefasApp.Application.Interfaces;
+using Tescaro.TarefasApp.Infra.Storage.Persistence;
 
 namespace Tescaro.TarefasApp.Application.Services
 {
     /// <summary>
-    /// Implementação do Serviço de Tarefa
+    /// Implementação dos serviços de tarefa da aplicação
     /// </summary>
     public class TarefaAppService:ITarefaAppService
     {
+        //atributo
+        private readonly TarefaPersistence _tarefaPersistence;
         private readonly IMediator _mediator;
-        private readonly FakeDataStore _fakeDataStore;
+        private readonly IMapper _mapper;
 
-        public TarefaAppService(IMediator mediator, FakeDataStore fakeDataStore)
+        public TarefaAppService(TarefaPersistence tarefaPersistence, IMediator mediator, IMapper mapper)
         {
+            _tarefaPersistence = tarefaPersistence;
             _mediator = mediator;
-            _fakeDataStore = fakeDataStore;
+            _mapper = mapper;
         }
 
         public async Task<TarefaDTO> Create(TarefaCreateCommand command)
@@ -29,6 +33,7 @@ namespace Tescaro.TarefasApp.Application.Services
         {
             return await _mediator.Send(command);
         }
+
         public async Task<TarefaDTO> Delete(TarefaDeleteCommand command)
         {
             return await _mediator.Send(command);
@@ -36,14 +41,16 @@ namespace Tescaro.TarefasApp.Application.Services
 
         public List<TarefaDTO>? GetAll()
         {
-            return _fakeDataStore.GetAll();
+            var result = _tarefaPersistence.FindAll().Result;
+            return _mapper.Map<List<TarefaDTO>>(result);
         }
 
         public TarefaDTO? GetById(Guid id)
         {
-            return _fakeDataStore.GetById(id);
+            var result = _tarefaPersistence.Find(id).Result;
+            return _mapper.Map<TarefaDTO>(result);
         }
-
     }
+
 
 }

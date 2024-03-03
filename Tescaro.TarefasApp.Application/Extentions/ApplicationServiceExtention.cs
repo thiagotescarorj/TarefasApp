@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Tescaro.TarefasApp.Application.Data;
 using Tescaro.TarefasApp.Application.Interfaces;
 using Tescaro.TarefasApp.Application.Services;
 
@@ -9,23 +8,30 @@ namespace Tescaro.TarefasApp.Application.Extensions
     /// Classe de extensão para configurar os serviços da camada de aplicação do sistema
     /// </summary>
 
-    public static class ApplicationServiceExtension
+
+    /// <summary>
+    /// Classe de extensão para configurar os serviços
+    /// da camada de aplicação do sistema
+    /// </summary>
+    public static class ApplicationServicesExtension
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services) 
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            //Configuração do MediatR
-            services.AddMediatR(x => 
+            //configurando o MediatR
+            services.AddMediatR(cfg =>
             {
-                x.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());            
+                cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             });
 
-            //registrando a classe FakeDataStore
-            services.AddSingleton<FakeDataStore>();
+            //configurando o AutoMapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //registrando as interfaces/classe de serviço da aplicação
+            //registrando as interfaces/classes de serviço da aplicação
             services.AddTransient<ITarefaAppService, TarefaAppService>();
 
             return services;
         }
     }
+
 }
+

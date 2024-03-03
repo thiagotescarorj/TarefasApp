@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tescaro.TarefasApp.Application\Tescaro.TarefasApp.Application.csproj" />
+    <ProjectReference Include="..\Tescaro.TarefasApp.Domain\Tescaro.TarefasApp.Domain.csproj" />
+    <ProjectReference Include="..\Tescaro.TarefasApp.Infra.Storage\Tescaro.TarefasApp.Infra.Storage.csproj" />
     <ProjectReference Include="..\Tescaro.TarefasApp.Ingra.Data\Tescaro.TarefasApp.Infra.Data.csproj" />
   </ItemGroup>
 

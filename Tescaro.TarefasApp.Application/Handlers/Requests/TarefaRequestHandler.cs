@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,105 +8,88 @@ using System.Threading.Tasks;
 using Tescaro.TarefasApp.Application.Commands;
 using Tescaro.TarefasApp.Application.DTOs;
 using Tescaro.TarefasApp.Application.Enumerators;
+using Tescaro.TarefasApp.Application.Handlers.Notifications;
+using Tescaro.TarefasApp.Domain.Entities;
+using Tescaro.TarefasApp.Domain.Interfaces.Services;
 
 namespace Tescaro.TarefasApp.Application.Handlers.Requests
 {
     /// <summary>
-    /// Classe que recebe as requisições command:
-    /// - CREATE
-    /// - UPADTE
-    /// - DELETE
+    /// Classe para receber as requisições COMMANDS (CREATE, UPDATE e DELETE)
     /// </summary>
-
     public class TarefaRequestHandler:
-          IRequestHandler<TarefaCreateCommand, TarefaDto>,
-          IRequestHandler<TarefaUpdateCommand, TarefaDto>,
-          IRequestHandler<TarefaDeleteCommand, TarefaDto>
+        IRequestHandler<TarefaCreateCommand, TarefaDTO>,
+        IRequestHandler<TarefaUpdateCommand, TarefaDTO>,
+        IRequestHandler<TarefaDeleteCommand, TarefaDTO>
     {
         //atributo
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+        private readonly ITarefaDomainService _tarefaDomainService;
 
         //construtor para injeção de dependência
-        public TarefaRequestHandler(IMediator mediator)
+        public TarefaRequestHandler(IMediator mediator, IMapper mapper, ITarefaDomainService tarefaDomainService)
         {
             _mediator = mediator;
+            _mapper = mapper;
+            _tarefaDomainService = tarefaDomainService;
         }
 
-        public async Task<TarefaDto> Handle(TarefaCreateCommand request, CancellationToken cancellationToken)
+        public async Task<TarefaDTO> Handle(TarefaCreateCommand request, CancellationToken cancellationToken)
         {
-            //capturar os dados para gravar a tarefa
-            var tarefa = new TarefaDto
-            {
-                Id = Guid.NewGuid(),
-                Nome = request.Nome,
-                DataHora = DateTime.Parse($"{request.Data} {request.Hora}"),
-                Descricao = request.Descricao,
-                Prioridade = (Prioridade)Enum.Parse(typeof(Prioridade), request.Prioridade.ToString())
-            };
-
-            //TODO: GRAVAR OS DADOS NO BANCO SQL
+            //Gravar os dados no domínio
+            var tarefa = _mapper.Map<Tarefa>(request);
+            await _tarefaDomainService.Add(tarefa);
 
             //Gerar uma notificação para que os dados
             //sejam replicados em um banco de consulta
+            var tarefaDTO = _mapper.Map<TarefaDTO>(tarefa);
             var tarefaNotification = new TarefaNotification
             {
-                Tarefa = tarefa,
+                Tarefa = tarefaDTO,
                 Action = TarefaNotificationAction.TarefaCriada
             };
 
             await _mediator.Publish(tarefaNotification);
-
-            return tarefa;
+            return tarefaDTO;
         }
 
-        public async Task<TarefaDto> Handle(TarefaUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<TarefaDTO> Handle(TarefaUpdateCommand request, CancellationToken cancellationToken)
         {
-            //capturar os dados para gravar a tarefa
-            var tarefa = new TarefaDto
-            {
-                Id = request.Id,
-                Nome = request.Nome,
-                DataHora = DateTime.Parse($"{request.Data} {request.Hora}"),
-                Descricao = request.Descricao,
-                Prioridade = (Prioridade)Enum.Parse(typeof(Prioridade), request.Prioridade.ToString())
-            };
-
-            //TODO: ATUALIZAR OS DADOS NO BANCO SQL
+            //Atualizar os dados no domínio
+            var tarefa = _mapper.Map<Tarefa>(request);
+            await _tarefaDomainService.Update(tarefa);
 
             //Gerar uma notificação para que os dados
             //sejam replicados em um banco de consulta
+            var tarefaDTO = _mapper.Map<TarefaDTO>(tarefa);
             var tarefaNotification = new TarefaNotification
             {
-                Tarefa = tarefa,
+                Tarefa = tarefaDTO,
                 Action = TarefaNotificationAction.TarefaAlterada
             };
 
             await _mediator.Publish(tarefaNotification);
-
-            return tarefa;
+            return tarefaDTO;
         }
 
-        public async Task<TarefaDto> Handle(TarefaDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<TarefaDTO> Handle(TarefaDeleteCommand request, CancellationToken cancellationToken)
         {
-            //capturar os dados para excluir a tarefa
-            var tarefa = new TarefaDto
-            {
-                Id = Guid.NewGuid()
-            };
-
-            //TODO: EXCLUIR OS DADOS NO BANCO SQL
+            //Excluir os dados no domínio
+            var tarefa = await _tarefaDomainService.GetById(request.Id.Value);
+            await _tarefaDomainService.Delete(tarefa);
 
             //Gerar uma notificação para que os dados
             //sejam replicados em um banco de consulta
+            var tarefaDTO = _mapper.Map<TarefaDTO>(tarefa);
             var tarefaNotification = new TarefaNotification
             {
-                Tarefa = tarefa,
+                Tarefa = tarefaDTO,
                 Action = TarefaNotificationAction.TarefaExcluida
             };
 
             await _mediator.Publish(tarefaNotification);
-
-            return tarefa;
+            return tarefaDTO;
         }
     }
 

@@ -1,6 +1,8 @@
 using Tescaro.TarefasApp.API.Extensions;
 using Tescaro.TarefasApp.Application.Extensions;
 using Tescaro.TarefasApp.Infra.Data.Extensions;
+using Tescaro.TarefasApp.Infra.Storage.Extensions;
+using Tescaro.TarefasApp.Domain.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,9 @@ builder.Services.AddRouting( x => x.LowercaseUrls = true);// URLS em caixa baixa
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDoc();
 builder.Services.AddApplicationServices();
+builder.Services.AddDomainServices();
 builder.Services.AddDataContext(builder.Configuration);
+builder.Services.AddMongoDb(builder.Configuration);
 
 var app = builder.Build();
 

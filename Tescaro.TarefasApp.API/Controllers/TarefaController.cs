@@ -8,11 +8,11 @@ namespace Tescaro.TarefasApp.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class TarefasController:ControllerBase
+    public class TarefaController:ControllerBase
     {
         private readonly ITarefaAppService? _tarefaAppService;
 
-        public TarefasController(ITarefaAppService? tarefaAppService)
+        public TarefaController(ITarefaAppService? tarefaAppService)
         {
             _tarefaAppService = tarefaAppService;
         }
@@ -25,7 +25,7 @@ namespace Tescaro.TarefasApp.API.Controllers
         [ProducesResponseType(typeof(TarefaDTO), 201)]
         public async Task<IActionResult> Post(TarefaCreateCommand command)
         {
-var dto = await _tarefaAppService?.Create(command);
+            var dto = await _tarefaAppService?.Create(command);
             return StatusCode(201, dto);
         }
 

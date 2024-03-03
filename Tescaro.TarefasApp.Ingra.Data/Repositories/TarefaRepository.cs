@@ -7,7 +7,7 @@ namespace Tescaro.TarefasApp.Infra.Data.Repositories
     /// <summary>
     /// Implementação do repositório de tarefas
     /// </summary>
-    public class TarefaRepository:BaseRepository<Tarefa, Guid?>, ITarefaRepository
+    public class TarefaRepository:BaseRepository<Tarefa, Guid>, ITarefaRepository
     {
         private readonly DataContext? _dataContext;
 
