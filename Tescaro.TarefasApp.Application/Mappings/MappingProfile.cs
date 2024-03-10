@@ -32,11 +32,6 @@ namespace Tescaro.TarefasApp.Application.Mappings
                     dest.DataHora = DateTime.Parse($"{src.Data} {src.Hora}");
                 });
 
-            //Tarefa > TarefaCollection
-            CreateMap<Tarefa, TarefaCollection>()
-                .AfterMap((src, dest) => {
-                    dest.DataHoraCadastro = DateTime.Now;
-                });
 
             //Tarefa > TarefaDTO
             CreateMap<Tarefa, TarefaDTO>()

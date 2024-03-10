@@ -28,7 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.Infra.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.IntegrationsTests", "Tescaro.TarefasApp.IntegrationsTests\Tescaro.TarefasApp.IntegrationsTests.csproj", "{B37C2D5C-80B2-4D68-A4C9-98F3C84BF462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.Infra.Storage", "Tescaro.TarefasApp.Infra.Storage\Tescaro.TarefasApp.Infra.Storage.csproj", "{F042CB73-499A-4620-93E7-B18675E667F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tescaro.TarefasApp.Infra.Storage", "Tescaro.TarefasApp.Infra.Storage\Tescaro.TarefasApp.Infra.Storage.csproj", "{F042CB73-499A-4620-93E7-B18675E667F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tescaro.TarefasApp.Infra.Messages", "Tescaro.TarefasApp.Infra.Messages\Tescaro.TarefasApp.Infra.Messages.csproj", "{66BB7965-0B9C-4C94-88AD-E007E3956C14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{F042CB73-499A-4620-93E7-B18675E667F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F042CB73-499A-4620-93E7-B18675E667F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F042CB73-499A-4620-93E7-B18675E667F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BB7965-0B9C-4C94-88AD-E007E3956C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BB7965-0B9C-4C94-88AD-E007E3956C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BB7965-0B9C-4C94-88AD-E007E3956C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BB7965-0B9C-4C94-88AD-E007E3956C14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{74344CC8-DE60-40C7-AE98-2C9429EF7D20} = {525BC92D-96DE-4603-B76B-2F06A48B8298}
 		{B37C2D5C-80B2-4D68-A4C9-98F3C84BF462} = {B3C8AE69-ED7C-44EE-8348-05328FB578CD}
 		{F042CB73-499A-4620-93E7-B18675E667F3} = {525BC92D-96DE-4603-B76B-2F06A48B8298}
+		{66BB7965-0B9C-4C94-88AD-E007E3956C14} = {525BC92D-96DE-4603-B76B-2F06A48B8298}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {420399BF-C04C-47BB-800C-31F7A1CAE428}

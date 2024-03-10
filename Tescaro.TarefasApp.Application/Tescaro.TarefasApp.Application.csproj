@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tescaro.TarefasApp.Infra.Messages\Tescaro.TarefasApp.Infra.Messages.csproj" />
     <ProjectReference Include="..\Tescaro.TarefasApp.Infra.Storage\Tescaro.TarefasApp.Infra.Storage.csproj" />
     <ProjectReference Include="..\Tescaro.TarefasApp.Domain\Tescaro.TarefasApp.Domain.csproj" />
   </ItemGroup>

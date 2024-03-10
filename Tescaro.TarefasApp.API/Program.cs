@@ -3,6 +3,7 @@ using Tescaro.TarefasApp.Application.Extensions;
 using Tescaro.TarefasApp.Infra.Data.Extensions;
 using Tescaro.TarefasApp.Infra.Storage.Extensions;
 using Tescaro.TarefasApp.Domain.Extensions;
+using Tescaro.TarefasApp.Infra.Messages.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddDomainServices();
 builder.Services.AddDataContext(builder.Configuration);
 builder.Services.AddMongoDb(builder.Configuration);
+builder.Services.AddRabbitMQ(builder.Configuration);
 
 var app = builder.Build();
 
